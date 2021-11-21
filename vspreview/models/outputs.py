@@ -24,6 +24,7 @@ class Outputs(Qt.QAbstractListModel, QYAMLObject):
     def __init__(self, local_storage: Optional[Mapping[str, Output]] = None) -> None:
         super().__init__()
         self.items: List[Output] = []
+        self.keys: List[int] = []
 
         local_storage = local_storage if local_storage is not None else {}
 
@@ -40,6 +41,7 @@ class Outputs(Qt.QAbstractListModel, QYAMLObject):
                 output = Output(vs_output, i)
 
             self.items.append(output)
+            self.keys.append(int(i))
 
     def __getitem__(self, i: int) -> Output:
         return self.items[i]
@@ -50,6 +52,12 @@ class Outputs(Qt.QAbstractListModel, QYAMLObject):
     def index_of(self, item: Output) -> int:
         return self.items.index(item)
 
+    def index_of_key(self, key:int) -> int:
+        if key in self.keys: return self.keys.index(key)
+    
+    def key_of_index(self, index:int) ->int:
+        return self.keys[index]
+    
     def __getiter__(self) -> Iterator[Output]:
         return iter(self.items)
 

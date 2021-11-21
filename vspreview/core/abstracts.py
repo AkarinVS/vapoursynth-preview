@@ -36,7 +36,7 @@ class AbstractMainWindow(Qt.QMainWindow, QAbstractYAMLObjectSingleton):
         raise NotImplementedError
 
     @abstractmethod
-    def switch_output(self, value: Union[int, Output]) -> None:
+    def switch_output(self, value: Union[int, Output], mode:int = 1) -> None:
         raise NotImplementedError()
 
     @abstractmethod

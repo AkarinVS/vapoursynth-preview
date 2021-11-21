@@ -127,19 +127,42 @@ class MainToolbar(AbstractToolbar):
         self.zoom_combobox    .currentTextChanged.connect(self.on_zoom_changed)
         self.switch_timeline_mode_button .clicked.connect(self.on_switch_timeline_mode_clicked)
 
-        add_shortcut(Qt.Qt.Key_1, lambda: self.main.switch_output(0))
-        add_shortcut(Qt.Qt.Key_2, lambda: self.main.switch_output(1))
-        add_shortcut(Qt.Qt.Key_3, lambda: self.main.switch_output(2))
-        add_shortcut(Qt.Qt.Key_4, lambda: self.main.switch_output(3))
-        add_shortcut(Qt.Qt.Key_5, lambda: self.main.switch_output(4))
-        add_shortcut(Qt.Qt.Key_6, lambda: self.main.switch_output(5))
-        add_shortcut(Qt.Qt.Key_7, lambda: self.main.switch_output(6))
-        add_shortcut(Qt.Qt.Key_8, lambda: self.main.switch_output(7))
-        add_shortcut(Qt.Qt.Key_9, lambda: self.main.switch_output(8))
-        add_shortcut(Qt.Qt.Key_0, lambda: self.main.switch_output(9))
         add_shortcut(Qt.Qt.Key_S,         self.sync_outputs_checkbox.click)
-        add_shortcut(Qt.Qt.CTRL               + Qt.Qt.Key_Tab, lambda: self.main.switch_output(self.outputs_combobox.currentIndex() + 1))
-        add_shortcut(Qt.Qt.CTRL + Qt.Qt.SHIFT + Qt.Qt.Key_Tab, lambda: self.main.switch_output(self.outputs_combobox.currentIndex() - 1))
+        if MainWindow().OUTPUT_INDEX_MODE == 0:
+            add_shortcut(Qt.Qt.Key_1, lambda: self.main.switch_output(0, mode=0))
+            add_shortcut(Qt.Qt.Key_2, lambda: self.main.switch_output(1, mode=0))
+            add_shortcut(Qt.Qt.Key_3, lambda: self.main.switch_output(2, mode=0))
+            add_shortcut(Qt.Qt.Key_4, lambda: self.main.switch_output(3, mode=0))
+            add_shortcut(Qt.Qt.Key_5, lambda: self.main.switch_output(4, mode=0))
+            add_shortcut(Qt.Qt.Key_6, lambda: self.main.switch_output(5, mode=0))
+            add_shortcut(Qt.Qt.Key_7, lambda: self.main.switch_output(6, mode=0))
+            add_shortcut(Qt.Qt.Key_8, lambda: self.main.switch_output(7, mode=0))
+            add_shortcut(Qt.Qt.Key_9, lambda: self.main.switch_output(8, mode=0))
+            add_shortcut(Qt.Qt.Key_0, lambda: self.main.switch_output(9, mode=0))
+            add_shortcut(Qt.Qt.CTRL               + Qt.Qt.Key_Tab, lambda: self.main.switch_output(self.outputs_combobox.currentIndex() + 1, mode=0))
+            add_shortcut(Qt.Qt.CTRL + Qt.Qt.SHIFT + Qt.Qt.Key_Tab, lambda: self.main.switch_output(self.outputs_combobox.currentIndex() - 1, mode=0))
+        elif MainWindow().OUTPUT_INDEX_MODE == 1:
+            add_shortcut(Qt.Qt.Key_1, lambda: self.main.switch_output(self.outputs.key_of_index(self.outputs_combobox.currentIndex())//10*10))
+            add_shortcut(Qt.Qt.Key_2, lambda: self.main.switch_output(self.outputs.key_of_index(self.outputs_combobox.currentIndex())//10*10+1))
+            add_shortcut(Qt.Qt.Key_3, lambda: self.main.switch_output(self.outputs.key_of_index(self.outputs_combobox.currentIndex())//10*10+2))
+            add_shortcut(Qt.Qt.Key_4, lambda: self.main.switch_output(self.outputs.key_of_index(self.outputs_combobox.currentIndex())//10*10+3))
+            add_shortcut(Qt.Qt.Key_5, lambda: self.main.switch_output(self.outputs.key_of_index(self.outputs_combobox.currentIndex())//10*10+4))
+            add_shortcut(Qt.Qt.Key_6, lambda: self.main.switch_output(self.outputs.key_of_index(self.outputs_combobox.currentIndex())//10*10+5))
+            add_shortcut(Qt.Qt.Key_7, lambda: self.main.switch_output(self.outputs.key_of_index(self.outputs_combobox.currentIndex())//10*10+6))
+            add_shortcut(Qt.Qt.Key_8, lambda: self.main.switch_output(self.outputs.key_of_index(self.outputs_combobox.currentIndex())//10*10+7))
+            add_shortcut(Qt.Qt.Key_9, lambda: self.main.switch_output(self.outputs.key_of_index(self.outputs_combobox.currentIndex())//10*10+8))
+            add_shortcut(Qt.Qt.Key_0, lambda: self.main.switch_output(self.outputs.key_of_index(self.outputs_combobox.currentIndex())//10*10+9))
+            add_shortcut(Qt.Qt.Key_F1,lambda: self.main.switch_output(self.outputs.key_of_index(self.outputs_combobox.currentIndex()) - self.outputs.key_of_index(self.outputs_combobox.currentIndex())//10*10))
+            add_shortcut(Qt.Qt.Key_F2,lambda: self.main.switch_output(self.outputs.key_of_index(self.outputs_combobox.currentIndex()) - self.outputs.key_of_index(self.outputs_combobox.currentIndex())//10*10+10))
+            add_shortcut(Qt.Qt.Key_F3,lambda: self.main.switch_output(self.outputs.key_of_index(self.outputs_combobox.currentIndex()) - self.outputs.key_of_index(self.outputs_combobox.currentIndex())//10*10+20))
+            add_shortcut(Qt.Qt.Key_F4,lambda: self.main.switch_output(self.outputs.key_of_index(self.outputs_combobox.currentIndex()) - self.outputs.key_of_index(self.outputs_combobox.currentIndex())//10*10+30))
+            add_shortcut(Qt.Qt.Key_F5,lambda: self.main.switch_output(self.outputs.key_of_index(self.outputs_combobox.currentIndex()) - self.outputs.key_of_index(self.outputs_combobox.currentIndex())//10*10+40))
+            add_shortcut(Qt.Qt.Key_F6,lambda: self.main.switch_output(self.outputs.key_of_index(self.outputs_combobox.currentIndex()) - self.outputs.key_of_index(self.outputs_combobox.currentIndex())//10*10+50))
+            add_shortcut(Qt.Qt.Key_F7,lambda: self.main.switch_output(self.outputs.key_of_index(self.outputs_combobox.currentIndex()) - self.outputs.key_of_index(self.outputs_combobox.currentIndex())//10*10+60))
+            add_shortcut(Qt.Qt.Key_F8,lambda: self.main.switch_output(self.outputs.key_of_index(self.outputs_combobox.currentIndex()) - self.outputs.key_of_index(self.outputs_combobox.currentIndex())//10*10+70))
+            add_shortcut(Qt.Qt.Key_F9,lambda: self.main.switch_output(self.outputs.key_of_index(self.outputs_combobox.currentIndex()) - self.outputs.key_of_index(self.outputs_combobox.currentIndex())//10*10+80))
+            add_shortcut(Qt.Qt.Key_F10,lambda: self.main.switch_output(self.outputs.key_of_index(self.outputs_combobox.currentIndex()) - self.outputs.key_of_index(self.outputs_combobox.currentIndex())//10*10+90))
+            add_shortcut(Qt.Qt.Key_F11,lambda: self.main.switch_output(self.outputs.key_of_index(self.outputs_combobox.currentIndex()) - self.outputs.key_of_index(self.outputs_combobox.currentIndex())//10*10+100))
 
         set_qobject_names(self)
 
@@ -324,6 +347,7 @@ class MainWindow(AbstractMainWindow):
     LOG_LEVEL         = logging.DEBUG
     OPENGL_RENDERING          = False
     ORDERED_OUTPUTS           = False
+    OUTPUT_INDEX_MODE         =     1
     OUTPUT_INDEX              =     0
     PLAY_BUFFER_SIZE = FrameInterval(get_usable_cpus_count())
     PNG_COMPRESSION_LEVEL     =     0  # 0 - 100
@@ -641,13 +665,20 @@ class MainWindow(AbstractMainWindow):
         if render_frame:
             self.current_output.graphics_scene_item.setImage(self.render_frame(frame))
 
-    def switch_output(self, value: Union[int, Output]) -> None:
+    def switch_output(self, value: Union[int, Output], mode:int = 1) -> None:
         if len(self.outputs) == 0:
             return
         if isinstance(value, Output):
             index = self.outputs.index_of(value)
-        else:
+        elif mode == 0:
             index = value
+        elif mode == 1: 
+            index = self.outputs.index_of_key(value)
+            while index == None and value >= 0:
+                value -= 1
+                index = index = self.outputs.index_of_key(value)
+            if value < 0:
+                index = self.toolbars.main.outputs_combobox.currentIndex()
 
         if index < 0 or index >= len(self.outputs):
             return
